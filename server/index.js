@@ -12,7 +12,7 @@ const { addUser, removeUser, getUser, getUsersInRoom, getAllUsers, getCodeCount,
     swipeRight,swipeLeft,getRightSwipes,getLeftSwipes, clearSwipes, 
     setMovieListOfCode, getMovieListOfCode, setPreferencesOfCode, getPreferencesOfCode} = require('./src/utils/users')
 
-const publicDirectoryPath = path.join(__dirname, '../client/public/build')
+const publicDirectoryPath = path.join(__dirname, '../client/build')
 app.use(express.static(publicDirectoryPath))
 //app.use(cors())
 // "start": "concurrently \"npm run server\" \"npm run client\""
@@ -26,11 +26,6 @@ const io = new Server(server, {
         methods: ["GET", "POST"]
     }
 })
-
-// Handle GET requests to /api route
-app.get("/api", (req, res) => {
-    res.json({ message: "Hello from server!" });
-  });
   
   // All other GET requests not handled before will return our React app
   app.get('*', (req, res) => {
