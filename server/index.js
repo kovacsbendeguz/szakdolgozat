@@ -12,7 +12,7 @@ const { addUser, removeUser, getUser, getUsersInRoom, getAllUsers, getCodeCount,
     swipeRight,swipeLeft,getRightSwipes,getLeftSwipes, clearSwipes, 
     setMovieListOfCode, getMovieListOfCode, setPreferencesOfCode, getPreferencesOfCode} = require('./src/utils/users')
 
-const publicDirectoryPath = path.join(__dirname, '../client/public')
+const publicDirectoryPath = path.join(__dirname, '../client/public/build')
 app.use(express.static(publicDirectoryPath))
 //app.use(cors())
 // "start": "concurrently \"npm run server\" \"npm run client\""

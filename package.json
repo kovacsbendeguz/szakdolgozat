@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "proxy": "http://localhost:3000",
   "engines": {
     "node": "16.11.1"
   },
@@ -11,6 +10,7 @@
     "server": "nodemon server/index.js",
     "client": "npm start --prefix client",
     "installs": "npm install && cd client && npm install",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "build": "cd client && npm install && npm run build",
     "start": "node server/index.js"
   },
