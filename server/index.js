@@ -27,7 +27,6 @@ const io = new Server(server, {
     }
 })
   
-  // All other GET requests not handled before will return our React app
 
 //TODO Solve errors caused by updated mongodb package
 
