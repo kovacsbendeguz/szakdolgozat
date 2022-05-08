@@ -15,7 +15,7 @@ const { addUser, removeUser, getUser, getUsersInRoom, getAllUsers, getCodeCount,
 const publicDirectoryPath = path.join(__dirname, '../client/public')
 app.use(express.static(publicDirectoryPath))
 //app.use(cors())
-
+// "start": "concurrently \"npm run server\" \"npm run client\""
 const server = http.createServer(app)
 
 const port = process.env.PORT || 3001
