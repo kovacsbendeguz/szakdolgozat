@@ -1,6 +1,8 @@
 const express = require("express")
+const path = require('path')
 const app = express()
 const http = require("http")
+const socketio = require('socket.io')
 const cors = require("cors")
 const { Server } = require("socket.io")
 const {loginUser, registerUser, logoutUser, updateUser, getUserData} = require('./src/db/dbhandle')
@@ -10,7 +12,9 @@ const { addUser, removeUser, getUser, getUsersInRoom, getAllUsers, getCodeCount,
     swipeRight,swipeLeft,getRightSwipes,getLeftSwipes, clearSwipes, 
     setMovieListOfCode, getMovieListOfCode, setPreferencesOfCode, getPreferencesOfCode} = require('./src/utils/users')
 
-app.use(cors())
+const publicDirectoryPath = path.join(__dirname, '../client/public')
+app.use(express.static(publicDirectoryPath))
+//app.use(cors())
 
 const server = http.createServer(app)
 

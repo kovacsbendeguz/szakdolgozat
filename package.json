@@ -10,6 +10,7 @@
     "server": "nodemon server/index.js",
     "client": "npm start --prefix client",
     "installs": "npm install && cd client && npm install",
+    "build": "cd client && npm install && npm run build",
     "start": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
@@ -27,7 +28,8 @@
     "nodemon": "^2.0.15",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
-    "socket.io": "^4.4.1",
+    "socket.io": "^4.5.0",
+    "socketio": "^1.0.0",
     "validator": "^13.7.0"
   }
 }
