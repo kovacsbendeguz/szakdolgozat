@@ -14,7 +14,7 @@ import Films from './pages/Films'
 import Genres from './pages/Genres'
 
 
-const socket = io.connect("http://localhost:3001")
+const socket = io()
 
 function App() {
   return (
