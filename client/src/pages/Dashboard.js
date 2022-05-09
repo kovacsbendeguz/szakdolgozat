@@ -17,19 +17,19 @@ export default function Dashboard({socket}) {
   const navigate = useNavigate()
   const toast = useToast()
 
-  if(localStorage.getItem('code')){
+  if(sessionStorage.getItem('code')){
     return (
       <Page>
         <Container>
           <Formik
             initialValues={{ code: '', password: '' }}
             onSubmit={async (values, actions) => {
-              localStorage.removeItem('code')
-              localStorage.setItem('started', false)
-              localStorage.setItem('counter', 0)
-              localStorage.setItem('matched', false)
+              sessionStorage.removeItem('code')
+              sessionStorage.setItem('started', false)
+              sessionStorage.setItem('counter', 0)
+              sessionStorage.setItem('matched', false)
 
-              if (!localStorage.getItem('code')) {
+              if (!sessionStorage.getItem('code')) {
                 navigate('/')
                 toast({
                   position: 'top',
@@ -79,7 +79,7 @@ export default function Dashboard({socket}) {
                   onSubmit={async (values, actions) => {
                     socket.emit('join', { code:values.code }, (error, code) => {
                       if (error) {
-                        localStorage.removeItem('code')
+                        sessionStorage.removeItem('code')
                         toast({
                           position: 'top',
                           title: 'Hiba',
@@ -89,7 +89,7 @@ export default function Dashboard({socket}) {
                         })
                       }
                       else {
-                        localStorage.setItem('code', code)
+                        sessionStorage.setItem('code', code)
                         navigate('/newroom')
                         toast({
                           position: 'top',
@@ -125,7 +125,7 @@ export default function Dashboard({socket}) {
                   onSubmit={async (values, actions) => {
                   
                     socket.emit('join', { code:values.code }, (error) => {
-                      localStorage.removeItem('code')
+                      sessionStorage.removeItem('code')
                       if (error) {
                         toast({
                           position: 'top',
@@ -145,7 +145,7 @@ export default function Dashboard({socket}) {
                         })
                       }
                       else {
-                        localStorage.setItem('code', values.code)
+                        sessionStorage.setItem('code', values.code)
                         navigate(`/room/${values.code}`)
                         toast({
                           position: 'top',

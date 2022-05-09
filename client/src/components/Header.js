@@ -32,7 +32,7 @@ import {
 } from 'react-icons/fi'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 
-const code = localStorage.getItem('code')
+const code = sessionStorage.getItem('code')
 
 let LinkItems = [
   { name: 'Főmenü', icon: FiHome, to: '/' },
@@ -42,7 +42,7 @@ let LinkItems = [
 ]
 
 const getHeaderText = (path) => {
-  const code = localStorage.getItem('code')
+  const code = sessionStorage.getItem('code')
   switch (path) {
     case `/room/${code}`:
       return 'Szoba'
@@ -59,10 +59,10 @@ export default function SidebarWithHeader({
   children,
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const code = localStorage.getItem('code')
+  const code = sessionStorage.getItem('code')
 
   if(isOpen){
-      if(localStorage.getItem("token")){
+      /*if(sessionStorage.getItem("token")){
           LinkItems = [
               { name: 'Főmenü', icon: FiHome, to: '/' },
               { name: 'Szoba', icon: FiCodesandbox, to: `/room/${code}` },
@@ -80,7 +80,7 @@ export default function SidebarWithHeader({
               { name: 'Bejelentkezés', icon: FiLogIn, to: '/login' },
               { name: 'Regisztráció', icon: FiUserPlus, to: '/registration' },
           ]
-      }
+      }*/
   }
 
   return (
@@ -178,7 +178,7 @@ function MobileNav({ onOpen, ...rest }) {
     const headerText = getHeaderText(location.pathname)
 
     let userMiniMenu;
-    if (!localStorage.getItem("token")) {
+    if (!sessionStorage.getItem("token")) {
         userMiniMenu = 
         <MenuList
             bg='white'
@@ -201,13 +201,10 @@ function MobileNav({ onOpen, ...rest }) {
             bg='white'
             borderColor='gray.200'
         >
-            <MenuItem>Profilom</MenuItem>
-            <MenuItem>Beállítások</MenuItem>
-            <MenuDivider />
             <MenuItem onClick={() => {
-              localStorage.removeItem('token')
-              localStorage.removeItem('email')
-              localStorage.removeItem('userData')
+              sessionStorage.removeItem('token')
+              sessionStorage.removeItem('email')
+              sessionStorage.removeItem('userData')
               navigate('/login')
             }}
             >
@@ -218,74 +215,69 @@ function MobileNav({ onOpen, ...rest }) {
     }
 
     return (
-    <Flex
-        ml={{ base: 0, md: 60 }}
-        px={{ base: 4, md: 4 }}
-        height="20"
-        alignItems="center"
-        bg={useColorModeValue('white', 'gray.900')}
-        borderBottomWidth="1px"
-        borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
-        justifyContent={{ base: 'space-between' }}
-        {...rest}
-    >
-        <Text
-        display={{ base: 'flex' }}
-        fontSize="2xl"
-        fontWeight="bold"
-        textAlign="left"
-        >
-        {headerText}
-        </Text>
-        <IconButton
-        display={{ base: 'flex', md: 'none' }}
-        onClick={onOpen}
-        variant="outline"
-        aria-label="open menu"
-        icon={<FiMenu />}
-        />
+      <Flex
+          ml={{ base: 0, md: 60 }}
+          px={{ base: 4, md: 4 }}
+          height="20"
+          alignItems="center"
+          bg={useColorModeValue('white', 'gray.900')}
+          borderBottomWidth="1px"
+          borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
+          justifyContent={{ base: 'space-between' }}
+          {...rest}
+      >
+          <Text
+          display={{ base: 'flex' }}
+          fontSize="2xl"
+          fontWeight="bold"
+          textAlign="left"
+          >
+          {headerText}
+          </Text>
+          <IconButton
+          display={{ base: 'flex', md: 'none' }}
+          onClick={onOpen}
+          variant="outline"
+          aria-label="open menu"
+          icon={<FiMenu />}
+          />
+  
+          <Text
+          display={{ base: 'flex', md: 'none' }}
+          fontSize="2xl"
+          fontFamily="monospace"
+          fontWeight="bold"
+          >
+          Logo
+          </Text>
+          <HStack spacing={{ base: '0', md: '6' }}>
+              <Flex alignItems="center">
+                  <Menu>
+                      <MenuButton
+                          py={2}
+                          transition="all 0.3s"
+                          _focus={{ boxShadow: 'none' }}
+                      >
+                          <HStack>
+                          User
+                          <VStack
+                              //display={{ base: 'none', md: 'flex' }}
+                              alignItems="flex-start"
+                              spacing="1px"
+                              ml="2"
+                          >
+                              <Text fontSize="sm">User</Text>
+                          </VStack>
 
-        <Text
-        display={{ base: 'flex', md: 'none' }}
-        fontSize="2xl"
-        fontFamily="monospace"
-        fontWeight="bold"
-        >
-        Logo
-        </Text>
-        <HStack spacing={{ base: '0', md: '6' }}>
-            <IconButton
-                size="lg"
-                variant="ghost"
-                aria-label="open menu"
-                icon={<FiBell />}
-            />
-            <Flex alignItems="center">
-                <Menu>
-                    <MenuButton
-                        py={2}
-                        transition="all 0.3s"
-                        _focus={{ boxShadow: 'none' }}
-                    >
-                        <HStack>
-                        User
-                        <VStack
-                            display={{ base: 'none', md: 'flex' }}
-                            alignItems="flex-start"
-                            spacing="1px"
-                            ml="2"
-                        >
-                            <Text fontSize="sm">User</Text>
-                        </VStack>
-                        <Box display={{ base: 'none', md: 'flex' }}>
-                            <FiChevronDown />
-                        </Box>
-                        </HStack>
-                    </MenuButton>
-                    {userMiniMenu}
-                </Menu>
-            </Flex>
-        </HStack>
-    </Flex>
-  )
+                          <Box /*display={{ base: 'flex', md: 'none' }}*/>
+                              <FiChevronDown />
+                          </Box>
+                          </HStack>
+                      </MenuButton>
+                      {userMiniMenu}
+                  </Menu>
+              </Flex>
+          </HStack>
+      </Flex>
+    )
 }

@@ -14,14 +14,14 @@ export default function Genres({socket}) {
     const navigate = useNavigate()
 
     const [genreList, setGenreList] = useState( () => {
-        const saved = localStorage.getItem('userData');
+        const saved = sessionStorage.getItem('userData');
         if(saved) {
             return (JSON.parse(saved)).genres
         }
         return []
     });
 
-    const email = localStorage.getItem('email')
+    const email = sessionStorage.getItem('email')
 
     useEffect(() => {
         socket.off('getGenreListOfUser').on('getGenreListOfUser', (list) => {

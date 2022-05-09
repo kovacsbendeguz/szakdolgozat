@@ -22,25 +22,25 @@ export default function Room({socket}) {
     const toast = useToast()
 
     const [counter, setCounter] = useState(() => {
-        const saved = localStorage.getItem("counter");
+        const saved = sessionStorage.getItem("counter");
         const initialValue = JSON.parse(saved);
         return initialValue || 0;
     });
     
     const [started, setStarted] = useState(() => {
-        const saved = localStorage.getItem("started");
+        const saved = sessionStorage.getItem("started");
         const initialValue = JSON.parse(saved);
         return initialValue || false;
     });
 
     const [matched, setMatched] = useState(() => {
-        const saved = localStorage.getItem("matched");
+        const saved = sessionStorage.getItem("matched");
         const initialValue = JSON.parse(saved);
         return initialValue || false;
     });
 
     const [messageList, setMessageList] = useState(() => {
-        const saved = localStorage.getItem("messageList");
+        const saved = sessionStorage.getItem("messageList");
         const initialValue = JSON.parse(saved);
         return initialValue || [{text:"Welcome", from:"admin", time:""}];
     });
@@ -49,36 +49,36 @@ export default function Room({socket}) {
     //const handleChange = (event) => setValue(event.target.value)
 
     const { id } = useParams()
-    const code = localStorage.getItem('code') ? localStorage.getItem('code') : id
+    const code = sessionStorage.getItem('code') ? sessionStorage.getItem('code') : id
 
     async function buttonClick() {
-        while(JSON.parse(localStorage.getItem("list"))[counter] === undefined){
+        while(JSON.parse(sessionStorage.getItem("list"))[counter] === undefined){
             await new Promise(resolve => setTimeout(resolve, 100));
         }
         
         setCounter(counter + 1)
-        localStorage.setItem('counter', counter+1)
+        sessionStorage.setItem('counter', counter+1)
         
-        if(counter === (JSON.parse(localStorage.getItem("list")).length-8)){
+        if(counter === (JSON.parse(sessionStorage.getItem("list")).length-8)){
             socket.emit('endOfFilms')
         }
     }
 
     useEffect(() => {
         socket.off('start').on('start', (list) => {
-            localStorage.setItem('list', JSON.stringify(list))
+            sessionStorage.setItem('list', JSON.stringify(list))
             
-            localStorage.setItem('counter', 0)
+            sessionStorage.setItem('counter', 0)
             setCounter(1)
             setCounter(0)
-            localStorage.setItem('started', true)
+            sessionStorage.setItem('started', true)
             setStarted(true)
         }) 
 
         socket.off('listaRefresh').on('listaRefresh', (list) => {
-            var lista = (JSON.parse(localStorage.getItem("list"))).concat(list)
-            localStorage.setItem('list', JSON.stringify(lista))
-            console.log(JSON.parse(localStorage.getItem("list")))
+            var lista = (JSON.parse(sessionStorage.getItem("list"))).concat(list)
+            sessionStorage.setItem('list', JSON.stringify(lista))
+            console.log(JSON.parse(sessionStorage.getItem("list")))
         })
 
         socket.off('foundAMatch').on('foundAMatch', (movie) => {
@@ -133,12 +133,12 @@ export default function Room({socket}) {
                 <Container>
                     <MovieCard {...matchedMovie}></MovieCard>
                     <Button onClick={() => {
-                        localStorage.removeItem('code')
-                        localStorage.setItem('started', false)
-                        localStorage.setItem('counter', 0)
-                        localStorage.setItem('matched', false)
+                        sessionStorage.removeItem('code')
+                        sessionStorage.setItem('started', false)
+                        sessionStorage.setItem('counter', 0)
+                        sessionStorage.setItem('matched', false)
         
-                        if (!localStorage.getItem('code')) {
+                        if (!sessionStorage.getItem('code')) {
                         navigate('/')
                         toast({
                             position: 'top',
@@ -215,12 +215,12 @@ export default function Room({socket}) {
             </Button>
         <SimpleGrid columns={{sm: 2, md: 2}} spacing={30}>
             <Container>
-                <MovieCard {...(JSON.parse(localStorage.getItem("list"))[counter])}></MovieCard>
+                <MovieCard {...(JSON.parse(sessionStorage.getItem("list"))[counter])}></MovieCard>
                 <Button 
                     onClick={async () => {
                         await buttonClick()
 
-                        const movieID = JSON.parse(localStorage.getItem("list"))[counter].imdb_id
+                        const movieID = JSON.parse(sessionStorage.getItem("list"))[counter].imdb_id
                         socket.emit('swipeLeft', movieID, (error) => {
                             if (error) {
                                 return console.log(error)
@@ -236,8 +236,8 @@ export default function Room({socket}) {
                         
                         await buttonClick()
 
-                        const movieID = JSON.parse(localStorage.getItem("list"))[counter].imdb_id
-                        const email = localStorage.getItem("email") ? localStorage.getItem("email") : ""
+                        const movieID = JSON.parse(sessionStorage.getItem("list"))[counter].imdb_id
+                        const email = sessionStorage.getItem("email") ? sessionStorage.getItem("email") : ""
                         socket.emit('swipeRight', movieID, email, (error) => {
                             if (error) {
                                 return console.log(error)

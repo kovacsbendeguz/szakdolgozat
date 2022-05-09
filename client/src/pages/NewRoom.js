@@ -30,7 +30,7 @@ export default function NewRoom({socket}) {
 
     const [button, setButton] = useState()
 
-    const code = localStorage.getItem('code')
+    const code = sessionStorage.getItem('code')
     
     return(
     <Page>
@@ -170,7 +170,7 @@ export default function NewRoom({socket}) {
                 colorScheme="teal"
                 isLoading={props.isSubmitting}
                 type="submit"
-                disabled={!JSON.parse(localStorage.getItem('started'))}
+                disabled={!JSON.parse(sessionStorage.getItem('started'))}
                 onClick={(e) => {
                   setButton(e.target.name)
                 }}
@@ -193,7 +193,7 @@ export default function NewRoom({socket}) {
                 mt={4}
                 colorScheme="teal"
                 isLoading={props.isSubmitting}
-                disabled={!JSON.parse(localStorage.getItem('started'))}
+                disabled={!JSON.parse(sessionStorage.getItem('started'))}
                 onClick={() => {
                   navigate(`/room/${code}`)
                 }}

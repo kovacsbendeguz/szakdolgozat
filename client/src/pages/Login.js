@@ -21,9 +21,9 @@ export default function Login({socket}) {
         socket.off("afterLogin").on("afterLogin", (data) => {
             if (data.token === "Succes") {
                 console.log(data)
-                localStorage.setItem('token', data.token)
-                localStorage.setItem('email', data.email)
-                localStorage.setItem('userData', JSON.stringify(data.userData))
+                sessionStorage.setItem('token', data.token)
+                sessionStorage.setItem('email', data.email)
+                sessionStorage.setItem('userData', JSON.stringify(data.userData))
                 navigate('/')
                 toast({
                     position: 'top',
@@ -44,7 +44,7 @@ export default function Login({socket}) {
         })
     })
 
-    if (localStorage.getItem('token')) {
+    if (sessionStorage.getItem('token')) {
         return (
         <Page>
             <Container>
@@ -55,9 +55,9 @@ export default function Login({socket}) {
                 mt={4}
                 colorScheme="teal"
                 onClick={() => {
-                localStorage.removeItem('token')
-                localStorage.removeItem('email')
-                localStorage.removeItem('userData')
+                sessionStorage.removeItem('token')
+                sessionStorage.removeItem('email')
+                sessionStorage.removeItem('userData')
                 window.location.reload()
                 }}
             >

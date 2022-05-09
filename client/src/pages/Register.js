@@ -25,9 +25,9 @@ export default function Registration({socket}) {
     useEffect(() => {
         socket.off("afterRegister").on("afterRegister", (data) => {
             if (data.token === "Succes") {
-                localStorage.setItem('token', data.token)
-                localStorage.setItem('email', data.email)
-                localStorage.setItem('userData', JSON.stringify(data.userData))
+                sessionStorage.setItem('token', data.token)
+                sessionStorage.setItem('email', data.email)
+                sessionStorage.setItem('userData', JSON.stringify(data.userData))
                 navigate('/')
                 toast({
                     position: 'top',

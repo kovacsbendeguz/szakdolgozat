@@ -14,14 +14,14 @@ export default function Films({socket}) {
     const navigate = useNavigate()
 
     const [movieList, setMovieList] = useState( () => {
-        const saved = localStorage.getItem('userData');
+        const saved = sessionStorage.getItem('userData');
         if(saved) {
             return (JSON.parse(saved)).movies
         }
         return []
     });
 
-    const email = localStorage.getItem('email')
+    const email = sessionStorage.getItem('email')
 
     useEffect(() => {
         socket.off('getMovieListOfUser').on('getMovieListOfUser', (list) => {
