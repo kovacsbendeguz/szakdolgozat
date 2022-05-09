@@ -22,19 +22,23 @@ import {
   FiHome,
   FiBell,
   FiChevronDown,
-  FiFile,
-  FiTag,
-  FiCalendar,
   FiMenu,
+  FiFilm,
+  FiGrid,
+  FiCodesandbox,
+  FiLogIn,
+  FiLogOut,
+  FiUserPlus,
 } from 'react-icons/fi'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 
 const code = localStorage.getItem('code')
+
 let LinkItems = [
   { name: 'Főmenü', icon: FiHome, to: '/' },
-  { name: 'Szoba', icon: FiFile, to: `/room/${code}` },
-  { name: 'Filmek', icon: FiCalendar, to: '/films' },
-  { name: 'Kategóriák', icon: FiTag, to: '/genres' },
+  { name: 'Szoba', icon: FiCodesandbox, to: `/room/${code}` },
+  { name: 'Filmek', icon: FiFilm, to: '/films' },
+  { name: 'Kategóriák', icon: FiGrid, to: '/genres' },
 ]
 
 const getHeaderText = (path) => {
@@ -61,20 +65,20 @@ export default function SidebarWithHeader({
       if(localStorage.getItem("token")){
           LinkItems = [
               { name: 'Főmenü', icon: FiHome, to: '/' },
-              { name: 'Szoba', icon: FiFile, to: `/room/${code}` },
-              { name: 'Filmek', icon: FiCalendar, to: '/films' },
-              { name: 'Kategóriák', icon: FiTag, to: '/genres' },
-              { name: 'Kijelentkezés', icon: FiTag, to: '/login' },
+              { name: 'Szoba', icon: FiCodesandbox, to: `/room/${code}` },
+              { name: 'Filmek', icon: FiFilm, to: '/films' },
+              { name: 'Kategóriák', icon: FiGrid, to: '/genres' },
+              { name: 'Kijelentkezés', icon: FiLogOut, to: '/login' },
           ]
       }
       else {
           LinkItems = [
               { name: 'Főmenü', icon: FiHome, to: '/' },
-              { name: 'Szoba', icon: FiFile, to: `/room/${code}` },
-              { name: 'Filmek', icon: FiCalendar, to: '/films' },
-              { name: 'Kategóriák', icon: FiTag, to: '/genres' },
-              { name: 'Bejelentkezés', icon: FiTag, to: '/login' },
-              { name: 'Regisztráció', icon: FiTag, to: '/registration' },
+              { name: 'Szoba', icon: FiCodesandbox, to: `/room/${code}` },
+              { name: 'Filmek', icon: FiFilm, to: '/films' },
+              { name: 'Kategóriák', icon: FiGrid, to: '/genres' },
+              { name: 'Bejelentkezés', icon: FiLogIn, to: '/login' },
+              { name: 'Regisztráció', icon: FiUserPlus, to: '/registration' },
           ]
       }
   }

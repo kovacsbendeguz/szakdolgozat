@@ -110,6 +110,22 @@ export default function Room({socket}) {
         
     })
 
+    if(code === null || code === 'null'){
+        return (
+            <Page>
+            <Container>
+                <Heading size='md'>Még nem léptél be szobába</Heading> 
+                <Button onClick={() => {
+                    navigate(`/`)
+                    }}>
+                        Vissza a főmenübe
+                </Button>
+                
+            </Container>
+            </Page>
+        )
+    }
+
     if(matched){
         return (
             <Page>

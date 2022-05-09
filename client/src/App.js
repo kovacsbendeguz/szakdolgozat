@@ -17,6 +17,18 @@ import Genres from './pages/Genres'
 const socket = io()
 
 function App() {
+
+  window.onbeforeunload = (event) => {
+    localStorage.clear();
+    /*const e = event || window.event;
+    e.preventDefault();
+    if (e) {
+      e.returnValue = '';
+    }
+
+    return '';*/
+  };
+
   return (
     <ChakraProvider theme={theme}>
       <Header>
