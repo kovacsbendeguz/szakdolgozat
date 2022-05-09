@@ -26,7 +26,7 @@ const MovieCard = (data) => {
                     </GridItem>
                     <GridItem w='100%' h='10' bg='blue.500'>
                         <Heading size='md'>Plot</Heading>
-                        <Text>{plot}</Text>
+                        <Text>{sessionStorage.getItem('email') ? plot : 'Please register or log in for this'}</Text>
                     </GridItem>
                     <GridItem w='100%' h='10' bg='blue.500'>
                         <Heading size='md'>Release</Heading>
@@ -42,7 +42,11 @@ const MovieCard = (data) => {
                     </GridItem>
                     <GridItem w='100%' h='10' bg='blue.500'>
                         <Heading size='md'>Trailer</Heading>
-                        <Link href={trailer} isExternal={true}>{trailer}</Link>
+                        {sessionStorage.getItem('email') ? 
+                            <Link href={trailer} isExternal={true}>{trailer}</Link>
+                            : 
+                            <Text>{sessionStorage.getItem('email') ? plot : 'Please register or log in for this'}</Text>
+                    }
                     </GridItem>
                 </Grid>
             </Box>
