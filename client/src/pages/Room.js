@@ -58,8 +58,8 @@ export default function Room({socket}) {
         
         setCounter(counter + 1)
         localStorage.setItem('counter', counter+1)
-
-        if(counter === (JSON.parse(localStorage.getItem("list")).length-7)){
+        
+        if(counter === (JSON.parse(localStorage.getItem("list")).length-8)){
             socket.emit('endOfFilms')
         }
     }
@@ -69,6 +69,7 @@ export default function Room({socket}) {
             localStorage.setItem('list', JSON.stringify(list))
             
             localStorage.setItem('counter', 0)
+            setCounter(1)
             setCounter(0)
             localStorage.setItem('started', true)
             setStarted(true)
@@ -216,6 +217,7 @@ export default function Room({socket}) {
                 >Nem jó</Button>
                 <Button 
                     onClick={async () => {
+                        
                         await buttonClick()
 
                         const movieID = JSON.parse(localStorage.getItem("list"))[counter].imdb_id

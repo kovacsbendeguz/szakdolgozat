@@ -12,7 +12,8 @@
     "installs": "npm install && cd client && npm install",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "build": "cd client && npm install && npm run build",
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "start2": "nodemon server/index.js"
   },
   "keywords": [],
   "author": "",

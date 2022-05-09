@@ -80,6 +80,7 @@ const promisifiedRequest = function(options) {
   };
 
 const usedIDsOfRooms = {"1234":[]}
+const pageOfRooms = {}
 
 const getMovieDataList = async (db, code, pref) => {
   try{
@@ -89,21 +90,25 @@ const getMovieDataList = async (db, code, pref) => {
     const list = []
     var _movieData = []
 
+    if(!pageOfRooms[code]) {
+      pageOfRooms[code] = 0
+    }
     var i = 0
-    var page = 0
     var counter = 0
 
     while(i < db){
 
       if(_movieData.length === 0 || counter === (db + 10)) {
-        page = page + 1
+        pageOfRooms[code] = pageOfRooms[code] + 1
 
         if(genre === "SKIP"){
           optionsPopular.qs.page_size = db + 10
+          optionsPopular.qs.page = pageOfRooms[code]
           _movieData = await promisifiedRequest(optionsPopular)
         }
         else {
           optionsGenre.qs.page_size = db + 10
+          optionsGenre.qs.page = pageOfRooms[code]
           optionsGenre.url = 'https://data-imdb1.p.rapidapi.com/movie/byGen/' + genre + '/'
           _movieData = await promisifiedRequest(optionsGenre)
         }
@@ -174,6 +179,7 @@ const getMatchDetails = async (id) => {
 
 const removeRoom = (code) => {
    delete usedIDsOfRooms[code]
+   delete pageOfRooms[code]
 }
 /*
 getMovieDataList(10, 1234, {
