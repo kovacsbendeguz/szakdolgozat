@@ -58,8 +58,8 @@ export default function Room({socket}) {
         
         setCounter(counter + 1)
         sessionStorage.setItem('counter', counter+1)
-        
-        if(counter === (JSON.parse(sessionStorage.getItem("list")).length-8)){
+
+        if(counter === (JSON.parse(sessionStorage.getItem("list")).length-7)){
             socket.emit('endOfFilms')
         }
     }
@@ -69,7 +69,6 @@ export default function Room({socket}) {
             sessionStorage.setItem('list', JSON.stringify(list))
             
             sessionStorage.setItem('counter', 0)
-            setCounter(1)
             setCounter(0)
             sessionStorage.setItem('started', true)
             setStarted(true)
@@ -95,17 +94,6 @@ export default function Room({socket}) {
                 message.from = "Me"
             }
             setMessageList((messageList) => [...messageList, message])
-        })
-
-        socket.off('askForNewPref').on('askForNewPref', () => {
-            toast({
-                position: 'top',
-                title: 'Nem található elég film ilyen feltételekkel, indíts új keresést',
-                status: 'error',
-                duration: 6000,
-                isClosable: true,
-            })
-            navigate(`/newroom`)
         })
         
     })
@@ -233,7 +221,6 @@ export default function Room({socket}) {
                 >Nem jó</Button>
                 <Button 
                     onClick={async () => {
-                        
                         await buttonClick()
 
                         const movieID = JSON.parse(sessionStorage.getItem("list"))[counter].imdb_id
