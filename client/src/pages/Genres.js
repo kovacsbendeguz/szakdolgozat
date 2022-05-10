@@ -85,7 +85,7 @@ export default function Genres({socket}) {
         <List spacing={1}>
             {genreList.length > 0 ? genreList.map((element) => {
                 return (
-                    <ListItem border='1px' key={element}>{element}</ListItem>
+                    <ListItem border='1px' borderColor='#e93038' padding='1px' key={element}>{element}</ListItem>
                 )
             })
             :

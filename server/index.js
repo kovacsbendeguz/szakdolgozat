@@ -114,6 +114,13 @@ io.on("connection", async (socket) => {
         callback()
     })
 
+    socket.on('refreshMovieListOfUser', async (email) => {
+        const userData = await getUserData(email)
+        socket.emit('getMovieListOfUser', userData)
+
+    })
+    
+
     socket.on('everybodyBackToMain', () => {
         const user = getUser(socket.id)
         if(user){

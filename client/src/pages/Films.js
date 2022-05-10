@@ -4,6 +4,7 @@ import {
     Heading,
     List,
     ListItem,
+    Text,
     Button,
   } from '@chakra-ui/react'
 import '../themes/Pages.css'
@@ -25,8 +26,9 @@ export default function Films({socket}) {
     const email = sessionStorage.getItem('email')
 
     useEffect(() => {
-        socket.off('getMovieListOfUser').on('getMovieListOfUser', (list) => {
-            setMovieList((movieList) => [...movieList, list])
+        socket.off('getMovieListOfUser').on('getMovieListOfUser', (userData) => {
+            console.log(userData)
+            setMovieList(userData.movies)
         })
     }) 
 
@@ -93,15 +95,18 @@ export default function Films({socket}) {
                 shadow: '0px 0px 60px 1px #e93038',
               }}
             onClick={() => {
-                //TODO
-                    console.log("HÁH")
-                }}>
+                socket.emit('refreshMovieListOfUser', email)
+            }}>
                     Frissítés
                 </Button>
         <List spacing={1}>
             {movieList.length > 0 ? movieList.map((element) => {
                 return (
-                    <ListItem border='1px' key={element.imdbID}>{element.name} (IMDB: {element.imdbID}) mentve: {element.dateOfSave}</ListItem>
+                    <ListItem border='1px' borderColor='#e93038' padding='1px' key={element.imdbID}>
+                        <Heading size={'md'}>{element.name}</Heading>
+                        <Text size='sm'>IMDB: {element.imdbID}</Text>
+                        <Text size='sm'>Mentve: {element.dateOfSave}</Text>
+                    </ListItem>
                 )
             })
             :
