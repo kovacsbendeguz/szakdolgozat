@@ -24,7 +24,6 @@ export default function Login({socket}) {
                 sessionStorage.setItem('token', data.token)
                 sessionStorage.setItem('email', data.email)
                 sessionStorage.setItem('userData', JSON.stringify(data.userData))
-                window.location.reload()
                 navigate('/')
                 toast({
                     position: 'top',
