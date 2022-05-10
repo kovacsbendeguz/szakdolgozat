@@ -1,6 +1,6 @@
 
 const Page = ({ children }) => (
-  <main style={{ backgroundColor: '#ED9F8E', marginTop: 10 }}>{children}</main>
+  <main style={{ color: 'white', backgroundColor: '#2e3136', marginTop: 10 }}>{children}</main>
 )
 
 export default Page

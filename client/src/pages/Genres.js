@@ -32,16 +32,41 @@ export default function Genres({socket}) {
     if(!email || email === ''){
         return(
             <Page>
-            <Container>
+            <Container
+                borderRadius={'30px'}
+                padding={'1em'}
+                backgroundColor={'rgb(233, 48, 56, 0.01)'}
+                shadow= '0px 0px 60px 1px #e93038'
+                color= 'white'>
                 <Flex alignItems="center" style={{ marginBottom: 24 }}>
                     <Heading>Jelentkezz be vagy regisztrálj a megtekintéshez</Heading>
                 </Flex>
-                <Button onClick={() => {
+                <Button 
+                    backgroundColor="#2e3136"
+                    border={'1px'}
+                    borderColor={'#e93038'}
+                    marginLeft="1em"
+                    marginRight="1em"
+                    _hover={{
+                        bg: 'rgb(233, 48, 56, 0.8)',
+                        color: 'white',
+                        shadow: '0px 0px 60px 1px #e93038',
+                      }}
+                onClick={() => {
                     navigate('/login')
                 }}>
                     Bejelentkezés
                 </Button>
-                <Button onClick={() => {
+                <Button 
+                    backgroundColor="#2e3136"
+                    border={'1px'}
+                    borderColor={'#e93038'}
+                    _hover={{
+                        bg: 'rgb(233, 48, 56, 0.8)',
+                        color: 'white',
+                        shadow: '0px 0px 60px 1px #e93038',
+                      }}
+                    onClick={() => {
                     navigate('/registration')
                 }}>
                     Regisztráció

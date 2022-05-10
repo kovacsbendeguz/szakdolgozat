@@ -189,11 +189,19 @@ io.on("connection", async (socket) => {
         if(email !== ""){
             const userData = await getUserData(email)
             var concatMovie = userData.movies
-            concatMovie.push({
+            
+            const existingMovie = concatMovie.find((movie) => {
+                return movie.title === movieDetails.title
+            })
+
+            if(!existingMovie){
+                concatMovie.push({
                     name:movieDetails.title,
                     imdbID: movieDetails.imdb_id,
                     dateOfSave: new Date()
-            })
+                })
+            }
+
             const movieData = concatMovie.filter((item, pos) => concatMovie.indexOf(item) === pos)
             
             await updateUser(email, "movies", data=movieData)

@@ -20,7 +20,14 @@ export default function Dashboard({socket}) {
   if(sessionStorage.getItem('code')){
     return (
       <Page>
-        <Container>
+        <Container 
+          borderRadius={'30px'}
+          padding={'1em'}
+          minHeight={'7.5em'}
+          backgroundColor={'rgb(233, 48, 56, 0.01)'}
+          shadow= '0px 0px 60px 1px #e93038'
+          color= 'white'
+        >
           <Formik
             initialValues={{ code: '', password: '' }}
             onSubmit={async (values, actions) => {
@@ -54,7 +61,14 @@ export default function Dashboard({socket}) {
             <Form>
               <Button 
                 mt={4}
-                colorScheme="teal"
+                backgroundColor="#2e3136"
+                border={'1px'}
+                borderColor={'#e93038'}
+                _hover={{
+                  bg: 'rgb(233, 48, 56, 0.8)',
+                  color: 'white',
+                  shadow: '0px 0px 60px 1px #e93038',
+                }}
                 isLoading={props.isSubmitting}
                 type="submit"
               >
@@ -70,7 +84,12 @@ export default function Dashboard({socket}) {
 
   return (
     <Page>
-      <Container>
+      <Container 
+        borderRadius={'30px'}
+        backgroundColor={'rgb(233, 48, 56, 0.01)'}
+        shadow= '0px 0px 60px 1px #e93038'
+        padding={'1em'}
+          >
         <SimpleGrid columns={{sm: 2, md: 2}} spacing={30}>
           <Box>  {/**letrehozas */}
             <Flex alignItems="center" style={{ marginBottom: 24 }}>
@@ -107,7 +126,15 @@ export default function Dashboard({socket}) {
                   <Form>
                     <Button 
                       mt={4}
-                      colorScheme="teal"
+                      color='white'
+                      backgroundColor="#2e3136"
+                      border={'1px'}
+                      borderColor={'#e93038'}
+                      _hover={{
+                        bg: 'rgb(233, 48, 56, 0.8)',
+                        color: 'white',
+                        shadow: '0px 0px 60px 1px #e93038',
+                      }}
                       isLoading={props.isSubmitting}
                       type="submit"
                     >
@@ -163,7 +190,16 @@ export default function Dashboard({socket}) {
                   <Form>
                     <Button 
                       mt={4}
-                      colorScheme="teal"
+                      color='white'
+                      backgroundColor="#2e3136"
+                      border={'1px'}
+                      borderColor={'#e93038'}
+                      //shadow= '0px 0px 20px 0.3px #e93038'
+                      _hover={{
+                        bg: 'rgb(233, 48, 56, 0.8)',
+                        color: 'white',
+                        shadow: '0px 0px 60px 1px #e93038',
+                      }}
                       isLoading={props.isSubmitting}
                       type="submit"
                     >
@@ -176,8 +212,8 @@ export default function Dashboard({socket}) {
                           style={{ marginBottom: 12 }}
                           isInvalid={form.errors.code && form.touched.code}
                         >
-                          <FormLabel htmlFor="code">Kód</FormLabel>
-                          <Input {...field} id="code" type="code" />
+                          <FormLabel color={'white'} htmlFor="code">Kód</FormLabel>
+                          <Input borderColor={'#e93038'} textColor='white' {...field} id="code" type="code" />
                           <FormErrorMessage>{form.errors.code}</FormErrorMessage>
                         </FormControl>
                       )}

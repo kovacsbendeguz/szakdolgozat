@@ -29,6 +29,7 @@ import {
   FiLogIn,
   FiLogOut,
   FiUserPlus,
+  FiUser,
 } from 'react-icons/fi'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 
@@ -84,7 +85,7 @@ export default function SidebarWithHeader({
   }
 
   return (
-  <Box minH="100vh">
+  <Box minH="100vh" backgroundColor={"#2e3136"}>
       <SidebarContent
       onClose={() => onClose}
       display={{ base: 'none', md: 'block' }}
@@ -115,7 +116,8 @@ function SidebarContent({ onClose, ...rest }) {
   return (
     <Box
       transition="3s ease"
-      bg={useColorModeValue('white', 'gray.900')}
+      bg={useColorModeValue('#2e3136', 'gray.900')}
+      color={'white'}
       borderRight="1px"
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
       w={{ base: 'full', md: 60 }}
@@ -147,12 +149,14 @@ function NavItem({
         align="center"
         p="4"
         mx="4"
+        borderColor={"white"}
         borderRadius="lg"
         role="group"
         cursor="pointer"
         _hover={{
-          bg: 'cyan.400',
+          bg: 'rgb(233, 48, 56, 0.8)',
           color: 'white',
+          shadow: '0px 0px 60px 1px #e93038',
         }}
         {...rest}
       >
@@ -181,16 +185,32 @@ function MobileNav({ onOpen, ...rest }) {
     if (!sessionStorage.getItem("token")) {
         userMiniMenu = 
         <MenuList
-            bg='white'
-            borderColor='gray.200'
+          bg= 'rgb(46, 49, 54, 0.9)'
+          color= 'white'
+          border={'none'}
+          borderRadius='lg'
+          shadow='0px 0px 60px 1px #e93038'
         >
-            <MenuItem onClick={() => {
+            <MenuItem 
+            borderRadius="lg"
+            _hover={{
+              bg: 'rgb(233, 48, 56, 0.8)',
+              color: 'white',
+              shadow: '0px 0px 60px 1px #e93038',
+            }}
+            onClick={() => {
                 navigate('/login')
             }}
             >Bejelentkezés
             </MenuItem>
-            <MenuDivider />
-            <MenuItem onClick={() => {
+            <MenuItem 
+            borderRadius="lg"
+            _hover={{
+              bg: 'rgb(233, 48, 56, 0.8)',
+              color: 'white',
+              shadow: '0px 0px 60px 1px #e93038',
+            }} 
+            onClick={() => {
                 navigate('/registration')
             }}>Regisztráció
             </MenuItem>
@@ -198,8 +218,12 @@ function MobileNav({ onOpen, ...rest }) {
     } else {
         userMiniMenu = 
         <MenuList
-            bg='white'
-            borderColor='gray.200'
+          bg= '#2e3136'
+          _hover={{
+            bg: 'rgb(233, 48, 56, 0.8)',
+            color: 'white',
+            shadow: '0px 0px 60px 1px #e93038',
+          }}
         >
             <MenuItem onClick={() => {
               sessionStorage.removeItem('token')
@@ -218,11 +242,11 @@ function MobileNav({ onOpen, ...rest }) {
       <Flex
           ml={{ base: 0, md: 60 }}
           px={{ base: 4, md: 4 }}
+          color={'white'}
           height="20"
           alignItems="center"
-          bg={useColorModeValue('white', 'gray.900')}
-          borderBottomWidth="1px"
-          borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
+          bg={useColorModeValue('#2e3136')}
+          
           justifyContent={{ base: 'space-between' }}
           {...rest}
       >
@@ -237,6 +261,13 @@ function MobileNav({ onOpen, ...rest }) {
           <IconButton
           display={{ base: 'flex', md: 'none' }}
           onClick={onOpen}
+          border='none'
+          _hover={{
+            bg: 'rgb(233, 48, 56, 0.15)',
+
+            color: 'white',
+            shadow: '0px 0px 60px 1px #e93038',
+          }}
           variant="outline"
           aria-label="open menu"
           icon={<FiMenu />}
@@ -256,17 +287,26 @@ function MobileNav({ onOpen, ...rest }) {
                       <MenuButton
                           py={2}
                           transition="all 0.3s"
+                          color={'white'}
                           _focus={{ boxShadow: 'none' }}
+                          border='none'
+                          _hover={{
+                            bg: 'rgb(233, 48, 56, 0.15)',
+                            borderRadius: 'lg',
+                            color: 'white',
+                            shadow: '0px 0px 60px 1px #e93038',
+                          }}
                       >
-                          <HStack>
+                          <HStack >
                           User
+                          <Icon as={FiUser}></Icon>
                           <VStack
                               //display={{ base: 'none', md: 'flex' }}
                               alignItems="flex-start"
                               spacing="1px"
                               ml="2"
                           >
-                              <Text fontSize="sm">User</Text>
+                              <Text fontSize="sm" >User</Text>
                           </VStack>
 
                           <Box /*display={{ base: 'flex', md: 'none' }}*/>

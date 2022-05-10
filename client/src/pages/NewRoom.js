@@ -19,6 +19,7 @@ import {
 import { useState } from 'react'
 import { Form, Formik, Field } from 'formik'
 import { useNavigate } from 'react-router-dom'
+import selectTheme from '../themes/select'
 import Page from '../components/Page'
 
 export default function NewRoom({socket}) {
@@ -34,7 +35,13 @@ export default function NewRoom({socket}) {
     
     return(
     <Page>
-      <Container>
+      <Container 
+        borderRadius={'30px'}
+        padding={'1em'}
+        backgroundColor={'rgb(233, 48, 56, 0.01)'}
+        shadow= '0px 0px 60px 1px #e93038'
+        color= 'white'
+        >
       <Flex alignItems="center" style={{ marginBottom: 24 }}>
         <Heading>Szoba létrehozás</Heading>
       </Flex>
@@ -49,7 +56,6 @@ export default function NewRoom({socket}) {
           actions.setSubmitting(true)
 
           if(button === "continue") {
-            console.log("EGy szar vagyok")
             socket.emit('preferenciesContinue', values)
             navigate(`/room/${code}`)
 
@@ -70,13 +76,14 @@ export default function NewRoom({socket}) {
                     isInvalid={form.errors.number && form.touched.number}
                 >
                     <FormLabel htmlFor="genre">Genre</FormLabel>
-                    <Select 
-                      onChange={(v) => {
+                    <Select textColor={'white'}
+                        focusBorderColor='#e93038'
+                        onChange={(v) => {
                         form.setFieldValue('genre', v.target.value)
                       }}
                     >
                       {genres.map((genre) => {
-                        return (<option key={genre}>{genre}</option>)
+                        return (<option style={{ color: 'white', background:"#2e3136" }} key={genre}>{genre}</option>)
                       })}
                     </Select>
                     <FormErrorMessage>{form.errors.number}</FormErrorMessage>
@@ -91,6 +98,7 @@ export default function NewRoom({socket}) {
                 >
                     <FormLabel htmlFor="rating">Minimum rating</FormLabel>
                     <NumberInput
+                        focusBorderColor='#e93038'
                         id="rating" 
                         type="rating"
                         max={7}
@@ -155,9 +163,9 @@ export default function NewRoom({socket}) {
                           onChange={(val) => form.setFieldValue('matchMaking', val)}
                         >
                           <Stack direction="row" marginBottom={3}>
-                            <Radio value="two">At least 2</Radio>
-                            <Radio value="half" defaultChecked >At least 50%</Radio>
-                            <Radio value="all">All</Radio>
+                            <Radio colorScheme='red' value="two">At least 2</Radio>
+                            <Radio colorScheme='red' value="half" defaultChecked >At least 50%</Radio>
+                            <Radio colorScheme='red' value="all">All</Radio>
                           </Stack>
                         </RadioGroup>
                     <FormErrorMessage>{form.errors.number}</FormErrorMessage>
@@ -167,7 +175,14 @@ export default function NewRoom({socket}) {
             <Button
                 name={"continue"}
                 mt={4}
-                colorScheme="teal"
+                backgroundColor="#2e3136"
+                border={'1px'}
+                borderColor={'#e93038'}
+                _hover={JSON.parse(sessionStorage.getItem('started')) ? {
+                  bg: 'rgb(233, 48, 56, 0.8)',
+                  color: 'white',
+                  shadow: '0px 0px 60px 1px #e93038',
+                } : "none"}
                 isLoading={props.isSubmitting}
                 type="submit"
                 disabled={!JSON.parse(sessionStorage.getItem('started'))}
@@ -179,8 +194,17 @@ export default function NewRoom({socket}) {
             </Button>
             <Button
                 name={"newSearch"}
+                marginLeft='1em'
+                marginRight='1em'
                 mt={4}
-                colorScheme="teal"
+                backgroundColor="#2e3136"
+                border={'1px'}
+                borderColor={'#e93038'}
+                _hover={{
+                  bg: 'rgb(233, 48, 56, 0.8)',
+                  color: 'white',
+                  shadow: '0px 0px 60px 1px #e93038',
+                }}
                 isLoading={props.isSubmitting}
                 type="submit"
                 onClick={(e) => {
@@ -191,7 +215,14 @@ export default function NewRoom({socket}) {
             </Button>
             <Button
                 mt={4}
-                colorScheme="teal"
+                backgroundColor="#2e3136"
+                border={'1px'}
+                borderColor={'#e93038'}
+                _hover={JSON.parse(sessionStorage.getItem('started')) ? {
+                  bg: 'rgb(233, 48, 56, 0.8)',
+                  color: 'white',
+                  shadow: '0px 0px 60px 1px #e93038',
+                } : "none"}
                 isLoading={props.isSubmitting}
                 disabled={!JSON.parse(sessionStorage.getItem('started'))}
                 onClick={() => {

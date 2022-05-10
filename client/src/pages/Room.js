@@ -101,9 +101,24 @@ export default function Room({socket}) {
     if(code === null || code === 'null'){
         return (
             <Page>
-            <Container>
+            <Container 
+                borderRadius={'30px'}
+                padding={'1em'}
+                paddingTop={'2em'}
+                backgroundColor={'rgb(233, 48, 56, 0.01)'}
+                shadow= '0px 0px 60px 1px #e93038'
+                color= 'white'>
                 <Heading size='md'>Még nem léptél be szobába</Heading> 
-                <Button onClick={() => {
+                <Button 
+                    backgroundColor="#2e3136"
+                    border={'1px'}
+                    borderColor={'#e93038'}
+                    _hover={{
+                      bg: 'rgb(233, 48, 56, 0.8)',
+                      color: 'white',
+                      shadow: '0px 0px 60px 1px #e93038',
+                    }}
+                    onClick={() => {
                     navigate(`/`)
                     }}>
                         Vissza a főmenübe
@@ -118,9 +133,23 @@ export default function Room({socket}) {
         return (
             <Page>
                 <Heading size={'lg'}>Siker 🎉</Heading>
-                <Container>
+                <Container 
+                    borderRadius={'30px'}
+                    padding={'1em'}
+                    backgroundColor={'rgb(233, 48, 56, 0.01)'}
+                    shadow= '0px 0px 60px 1px #e93038'
+                    color= 'white'>
                     <MovieCard {...matchedMovie}></MovieCard>
-                    <Button onClick={() => {
+                    <Button 
+                        backgroundColor="#2e3136"
+                        border={'1px'}
+                        borderColor={'#e93038'}
+                        _hover={{
+                          bg: 'rgb(233, 48, 56, 0.8)',
+                          color: 'white',
+                          shadow: '0px 0px 60px 1px #e93038',
+                        }}
+                        onClick={() => {
                         sessionStorage.removeItem('code')
                         sessionStorage.setItem('started', false)
                         sessionStorage.setItem('counter', 0)
@@ -147,7 +176,16 @@ export default function Room({socket}) {
                         }}>
                             Kilépés a szobából
                     </Button>
-                    <Button onClick={() => {
+                    <Button 
+                        backgroundColor="#2e3136"
+                        border={'1px'}
+                        borderColor={'#e93038'}
+                        _hover={{
+                          bg: 'rgb(233, 48, 56, 0.8)',
+                          color: 'white',
+                          shadow: '0px 0px 60px 1px #e93038',
+                        }}
+                        onClick={() => {
                         setMatched(false)
                         socket.emit('everybodyContinue')
                         toast({
@@ -168,14 +206,37 @@ export default function Room({socket}) {
     if(!started) {
         return (
             <Page>
-                <Button onClick={() => {
+                <Button 
+                    backgroundColor="#2e3136"
+                    border={'1px'}
+                    borderColor={'#e93038'}
+                    _hover={{
+                      bg: 'rgb(233, 48, 56, 0.8)',
+                      color: 'white',
+                      shadow: '0px 0px 60px 1px #e93038',
+                    }}
+                    onClick={() => {
                     navigate(`/newroom`)
                 }}>
                     Keresés szerkesztése
                 </Button>
-            <Container>
+            <Container
+                borderRadius={'30px'}
+                padding={'1em'}
+                backgroundColor={'rgb(233, 48, 56, 0.01)'}
+                shadow= '0px 0px 60px 1px #e93038'
+                color= 'white'>
                 <Heading size='md'>A szoba kódja: {code}</Heading> 
-                <Button onClick={() => {
+                <Button 
+                    backgroundColor="#2e3136"
+                    border={'1px'}
+                    borderColor={'#e93038'}
+                    _hover={{
+                      bg: 'rgb(233, 48, 56, 0.8)',
+                      color: 'white',
+                      shadow: '0px 0px 60px 1px #e93038',
+                    }}
+                    onClick={() => {
                     navigator.clipboard.writeText(code)
                     toast({
                         position: 'top',
@@ -196,15 +257,36 @@ export default function Room({socket}) {
     return (
         
         <Page>
-            <Button onClick={() => {
+            <Button
+                backgroundColor="#2e3136"
+                border={'1px'}
+                float="top"
+                margin="3px"
+                borderColor={'#e93038'}
+                _hover={{
+                  bg: 'rgb(233, 48, 56, 0.8)',
+                  color: 'white',
+                  shadow: '0px 0px 60px 1px #e93038',
+                }}
+                onClick={() => {
                 navigate(`/newroom`)
             }}>
                 Keresés szerkesztése
             </Button>
-        <SimpleGrid columns={{sm: 2, md: 2}} spacing={30}>
-            <Container>
+        <SimpleGrid 
+                columns={{sm: 1, md: 2}} >
+            <Container 
+                borderRadius={'30px'}
+                padding={'1em'}
+                backgroundColor={'rgb(233, 48, 56, 0.01)'}
+                shadow= '0px 0px 60px 1px #e93038'
+                color= 'white'
+                >
                 <MovieCard {...(JSON.parse(sessionStorage.getItem("list"))[counter])}></MovieCard>
                 <Button 
+                    float={'left'}
+                    margin='5px'
+                    background={"red"}
                     onClick={async () => {
                         await buttonClick()
 
@@ -220,6 +302,9 @@ export default function Room({socket}) {
                     background={"red"}
                 >Nem jó</Button>
                 <Button 
+                    float={'right'}
+                    margin='5px'
+                    background={"green"}
                     onClick={async () => {
                         await buttonClick()
 
@@ -235,7 +320,15 @@ export default function Room({socket}) {
                     background={"green"}
                 >Jó</Button>
             </Container>
-            <Box borderRadius='md' bg='pink'>
+            <Container 
+                borderRadius='md' 
+                width='15em' 
+                float='right'
+                padding={'1em'}
+                backgroundColor={'rgb(233, 48, 56, 0.01)'}
+                shadow= '0px 0px 60px 1px #e93038'
+                color= 'white'
+            >
                 <Heading>Chatbox</Heading>
                 <ScrollToBottom className='chatboxWithScroll'>
                     {messageList.map((message) => {
@@ -273,7 +366,7 @@ export default function Room({socket}) {
                     )}
                 </Formik>
                 
-            </Box>
+            </Container>
         </SimpleGrid>
        
         

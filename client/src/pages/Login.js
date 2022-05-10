@@ -48,7 +48,12 @@ export default function Login({socket}) {
     if (sessionStorage.getItem('token')) {
         return (
         <Page>
-            <Container>
+            <Container 
+                borderRadius={'30px'}
+                padding={'1em'}
+                backgroundColor={'rgb(233, 48, 56, 0.01)'}
+                shadow= '0px 0px 60px 1px #e93038'
+                color= 'white'>
             <Flex alignItems="center" style={{ marginBottom: 24 }}>
                 <Heading>Kijelentkezés</Heading>
             </Flex>
@@ -70,7 +75,12 @@ export default function Login({socket}) {
     }
     return (
         <Page>
-        <Container>
+        <Container
+            borderRadius={'30px'}
+            padding={'1em'}
+            backgroundColor={'rgb(233, 48, 56, 0.01)'}
+            shadow= '0px 0px 60px 1px #e93038'
+            color= 'white'>
             <Flex alignItems="center" style={{ marginBottom: 24 }}>
             <Heading>Bejelentkezés</Heading>
             </Flex>
@@ -92,7 +102,8 @@ export default function Login({socket}) {
                         isRequired
                     >
                         <FormLabel htmlFor="email">Email</FormLabel>
-                        <Input {...field} id="email" type="email" />
+                        <Input focusBorderColor='#e93038'
+                            colorScheme='red'{...field} id="email" type="email" />
                         <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                     </FormControl>
                     )}
@@ -104,14 +115,22 @@ export default function Login({socket}) {
                         isRequired
                     >
                         <FormLabel htmlFor="email">Jelszó</FormLabel>
-                        <Input {...field} id="password" type="password" />
+                        <Input focusBorderColor='#e93038'
+                            colorScheme='red' {...field} id="password" type="password" />
                         <FormErrorMessage>{form.errors.password}</FormErrorMessage>
                     </FormControl>
                     )}
                 </Field>
                 <Button
                     mt={4}
-                    colorScheme="teal"
+                    backgroundColor="#2e3136"
+                    border={'1px'}
+                    borderColor={'#e93038'}
+                    _hover={{
+                        bg: 'rgb(233, 48, 56, 0.8)',
+                        color: 'white',
+                        shadow: '0px 0px 60px 1px #e93038',
+                      }}
                     isLoading={props.isSubmitting}
                     type="submit"
                 >
