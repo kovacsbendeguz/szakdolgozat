@@ -24,7 +24,6 @@ function App() {
     if (e) {
       e.returnValue = '';
     }
-
     return '';
   };
 
