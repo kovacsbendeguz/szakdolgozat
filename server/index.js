@@ -8,7 +8,7 @@ const { Server } = require("socket.io")
 const {loginUser, registerUser, logoutUser, updateUser, getUserData} = require('./src/db/dbhandle')
 const { generateMessage, generateLocationMessage } = require('./src/utils/messages')
 const {getMovieDataList, getMatchDetails } = require('./src/utils/imdbRequest')
-const { addUser, removeUser, getUser, getUsersInRoom, getAllUsers, getCodeCount,
+const { addUser, removeUser, setUserCode, getUser, getUsersInRoom, getAllUsers, getCodeCount,
     swipeRight,swipeLeft,getRightSwipes,getLeftSwipes, clearSwipes, 
     setMovieListOfCode, getMovieListOfCode, setPreferencesOfCode, getPreferencesOfCode} = require('./src/utils/users')
 
@@ -65,6 +65,7 @@ io.on("connection", async (socket) => {
                 socket.emit('askForNewPref')
             }
             else {
+                console.log("kurvagecianyja")
                 io.to(user.code).emit('start', list)
             }
             
@@ -102,6 +103,7 @@ io.on("connection", async (socket) => {
             }
             else{
                 if(getCodeCount()[user.code] > 1){
+                    console.log("Mészafaszba", getAllUsers(), user)
                     io.to(user.code).emit('start', list)
                 }
             }
@@ -112,6 +114,15 @@ io.on("connection", async (socket) => {
         const user = getUser(socket.id)
         io.to(user.code).emit('message', generateMessage(user.username, message))
         callback()
+    })
+
+    socket.on('removeCodeFromUser', () => {
+        //TODO
+        setUserCode(socket.id, null)
+    })
+
+    socket.on('addCodeToUser', (code) => {
+        setUserCode(socket.id, code)
     })
 
     socket.on('refreshMovieListOfUser', async (email) => {

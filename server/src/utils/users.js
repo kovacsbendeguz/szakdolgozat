@@ -30,11 +30,18 @@ const addUser = ({ id, code }) => {
         }
     }
 
-
     code = code.toString()
     const user = { id, code }
+
+    const index = users.findIndex((user) => user.id === id)
+    if (index !== -1) {
+        users[index].code = code 
+    }
+    else{
+        users.push(user)
+    }
     console.log(user)
-    users.push(user)
+
 
     const existingCode = usedCodes.hasOwnProperty(code)
     if(existingCode){
@@ -69,6 +76,14 @@ const removeUser = (id_) => {
         return users.splice(index, 1)[0]
     }
 
+}
+
+const setUserCode = (id, code) => {
+    users.map((user) => {
+        if(user.id === id){
+            user.code = code
+        }
+    })
 }
 
 const getUser = (id) => {
@@ -177,6 +192,7 @@ const getPreferencesOfCode = (code) => {
 module.exports = {
     addUser,
     removeUser,
+    setUserCode,
     getUser,
     getUsersInRoom,
     getAllUsers,

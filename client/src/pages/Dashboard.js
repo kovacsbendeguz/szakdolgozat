@@ -31,6 +31,7 @@ export default function Dashboard({socket}) {
           <Formik
             initialValues={{ code: '', password: '' }}
             onSubmit={async (values, actions) => {
+              socket.emit("removeCodeFromUser")
               sessionStorage.removeItem('code')
               sessionStorage.setItem('started', false)
               sessionStorage.setItem('counter', 0)

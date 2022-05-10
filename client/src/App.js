@@ -18,14 +18,14 @@ const socket = io()
 
 function App() {
 
-  window.onbeforeunload = (event) => {
+  /*window.onbeforeunload = (event) => {
     const e = event || window.event;
     e.preventDefault();
     if (e) {
       e.returnValue = '';
     }
     return '';
-  };
+  };*/
 
   return (
     <ChakraProvider theme={theme}>

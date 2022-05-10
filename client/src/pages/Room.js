@@ -254,8 +254,7 @@ export default function Room({socket}) {
         )
     }
 
-    return (
-        
+    return (  
         <Page>
             <Button
                 backgroundColor="#2e3136"
@@ -299,7 +298,6 @@ export default function Room({socket}) {
                         })
                         
                     }}
-                    background={"red"}
                 >Nem jó</Button>
                 <Button 
                     float={'right'}
@@ -317,7 +315,6 @@ export default function Room({socket}) {
                     
                         })
                     }}
-                    background={"green"}
                 >Jó</Button>
             </Container>
             <Container 
