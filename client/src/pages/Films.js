@@ -18,6 +18,7 @@ export default function Films({socket}) {
     const [movieList, setMovieList] = useState( () => {
         const saved = sessionStorage.getItem('userData');
         if(saved) {
+            console.log(JSON.parse(saved))
             return (JSON.parse(saved)).movies
         }
         return []

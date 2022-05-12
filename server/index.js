@@ -14,6 +14,11 @@ const { addUser, removeUser, setUserCode, getUser, getUsersInRoom, getAllUsers, 
 
 const publicDirectoryPath = path.join(__dirname, '../client/build')
 app.use(express.static(publicDirectoryPath))
+
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  });
+  
 //app.use(cors())
 // "start": "concurrently \"npm run server\" \"npm run client\""
 const server = http.createServer(app)
@@ -26,11 +31,11 @@ const io = new Server(server, {
         methods: ["GET", "POST"]
     }
 })
-  
 
 //TODO Solve errors caused by updated mongodb package
 
 io.on("connection", async (socket) => {
+
     var list = {}
     var email = ""
 
@@ -45,16 +50,8 @@ io.on("connection", async (socket) => {
         }
 
         socket.join(user.code)
-
-        if(options.code === ""){
-            socket.emit('genreVisible')
-        }
-
-        socket.emit('message', generateMessage('Admin', 'Welcome!'))
-        socket.emit('message', generateMessage('Admin', `Your code is: ${user.code}`))
         
         if(getCodeCount()[user.code] > 1){
-            io.to(user.code).emit('messageL', generateMessage('Admin', 'Connected. Loading..'))
             list = getMovieListOfCode(user.code)
             if(list === undefined) {
                 const pref = getPreferencesOfCode(user.code)
@@ -65,7 +62,6 @@ io.on("connection", async (socket) => {
                 socket.emit('askForNewPref')
             }
             else {
-                console.log("kurvagecianyja")
                 io.to(user.code).emit('start', list)
             }
             
@@ -103,7 +99,6 @@ io.on("connection", async (socket) => {
             }
             else{
                 if(getCodeCount()[user.code] > 1){
-                    console.log("Mészafaszba", getAllUsers(), user)
                     io.to(user.code).emit('start', list)
                 }
             }
@@ -117,20 +112,8 @@ io.on("connection", async (socket) => {
     })
 
     socket.on('removeCodeFromUser', () => {
-        //TODO
         setUserCode(socket.id, null)
     })
-
-    socket.on('addCodeToUser', (code) => {
-        setUserCode(socket.id, code)
-    })
-
-    socket.on('refreshMovieListOfUser', async (email) => {
-        const userData = await getUserData(email)
-        socket.emit('getMovieListOfUser', userData)
-
-    })
-    
 
     socket.on('everybodyBackToMain', () => {
         const user = getUser(socket.id)
@@ -160,12 +143,6 @@ io.on("connection", async (socket) => {
         email = data.email ?? "" 
         const userData = await getUserData(email)
         socket.emit('afterRegister', {token, userData, email})
-    })
-
-    socket.on('logoutFromForm', async (email) => {
-        const token = await logoutUser(email)
-        email = "" 
-        socket.emit('afterLogout', token)
     })
 
     socket.on('endOfFilms', async () => {
@@ -230,6 +207,8 @@ io.on("connection", async (socket) => {
         
             await updateUser(email, "genres", data=genreData)
 
+            const userDataToUser = await getUserData(email)
+            socket.emit('getUserData', userDataToUser)
         }
 
         const isMatch = swipeRight(socket.id, movieID)

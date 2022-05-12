@@ -58,6 +58,7 @@ var optionsGenre = {
 
 var optionsDetailsFast = {
   method: 'GET',
+  timeout: 5000,
   url: 'https://data-imdb1.p.rapidapi.com/movie/id/tt1838556/',
   headers: {
     'x-rapidapi-key': '4f9f4b1cf0mshc872305eb0a0134p1c283ejsn050dfeffd872',

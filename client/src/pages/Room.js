@@ -95,6 +95,11 @@ export default function Room({socket}) {
             }
             setMessageList((messageList) => [...messageList, message])
         })
+
+        socket.off('getUserData').on('getUserData', (userData) => {
+            sessionStorage.setItem('userData', JSON.stringify(userData))
+        })
+
         
     })
 

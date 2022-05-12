@@ -19,34 +19,34 @@ const MovieCard = (data) => {
             <Box>
             <Image maxW='100%' minH='sm' src={image_url} />
             </Box>
-            <Box>
+            <Box overflow-wrap= 'anywhere'>
                 <Grid templateColumns='repeat(1, 6fr)' gap={6}>
-                    <GridItem  borderBottomWidth={'1px'}>
+                    <GridItem wordBreak={'break-word'} borderBottomWidth={'1px'}>
                         <Heading size='md'>Title</Heading>
                         <Text>{title}</Text>
                     </GridItem>
-                    <GridItem borderBottomWidth={'1px'}>
+                    <GridItem wordBreak={'break-word'} borderBottomWidth={'1px'}>
                         <Heading size='md'>Plot</Heading>
-                        <Text>{sessionStorage.getItem('email') ? plot : 'Please register or log in for this'}</Text>
+                        <Text color={sessionStorage.getItem('email') ? 'white' : 'red'}>{sessionStorage.getItem('email') ? plot : 'Please register or log in for this'}</Text>
                     </GridItem>
-                    <GridItem borderBottomWidth={'1px'}>
-                        <Heading size='md'>Release</Heading>
+                    <GridItem wordBreak={'break-word'} borderBottomWidth={'1px'}>
+                        <Heading  size='md'>Release</Heading>
                         <Text>{release}</Text>
                     </GridItem>
-                    <GridItem borderBottomWidth={'1px'}>
-                        <Heading size='md'>Rating (IMDB)</Heading>
+                    <GridItem wordBreak={'break-word'} borderBottomWidth={'1px'}>
+                        <Heading  size='md'>Rating (IMDB)</Heading>
                         <Text>{rating}</Text>
                     </GridItem>
-                    <GridItem borderBottomWidth={'1px'}>
-                        <Heading size='md'>Length</Heading>
+                    <GridItem wordBreak={'break-word'} borderBottomWidth={'1px'}>
+                        <Heading  size='md'>Length</Heading>
                         <Text>{movie_length_withhours}</Text>
                     </GridItem>
-                    <GridItem borderBottomWidth={'1px'}>
-                        <Heading size='md'>Trailer</Heading>
+                    <GridItem wordBreak={'break-word'} borderBottomWidth={'1px'}>
+                        <Heading  size='md'>Trailer</Heading>
                         {sessionStorage.getItem('email') ? 
                             <Link href={trailer} isExternal={true}>{trailer}</Link>
                             : 
-                            <Text>{sessionStorage.getItem('email') ? plot : 'Please register or log in for this'}</Text>
+                            <Text color={'red'} >Please register or log in for this</Text>
                     }
                     </GridItem>
                 </Grid>

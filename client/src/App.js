@@ -13,7 +13,6 @@ import NewRoom from './pages/NewRoom'
 import Films from './pages/Films'
 import Genres from './pages/Genres'
 
-
 const socket = io()
 
 function App() {
@@ -38,6 +37,7 @@ function App() {
           <Route path="/room/:id" element={<Room socket={socket}/>} />
           <Route path="/films" element={<Films socket={socket}/>} />
           <Route path="/genres" element={<Genres socket={socket}/>} />
+          <Route element={<Dashboard replace to="/" socket={socket}/>} />
         </Routes>
       </Header>
     </ChakraProvider>
