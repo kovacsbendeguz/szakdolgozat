@@ -1,0 +1,8 @@
+#Build
+npm run build
+
+#Run
+npm run start2
+
+#On
+localhost:3001
